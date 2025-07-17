@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import '../utils/helpers.dart';
 
 class TimerController extends GetxController {
   final RxInt remainingTime = 600.obs; // 10 minutes in seconds
@@ -61,10 +62,9 @@ class TimerController extends GetxController {
     isRunning.value = false;
     isPaused.value = false;
 
-    Get.snackbar(
-      'Timer Complete!',
-      'Time for your next walk activity!',
-      snackPosition: SnackPosition.TOP,
+    AwesomeSnackBarHelper.showSuccess(
+      title: 'Timer Complete!',
+      message: 'Time for your next walk activity!',
       duration: const Duration(seconds: 3),
     );
 

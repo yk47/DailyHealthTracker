@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../models/activity_log.dart';
 import '../services/api_service.dart';
+import '../utils/helpers.dart';
 
 class ActivityController extends GetxController {
   final RxList<ActivityLog> activityLogs = <ActivityLog>[].obs;
@@ -30,10 +31,9 @@ class ActivityController extends GetxController {
       currentPage = 1;
       hasMoreData.value = logs.length >= itemsPerPage;
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to load activity logs: $e',
-        snackPosition: SnackPosition.BOTTOM,
+      AwesomeSnackBarHelper.showError(
+        title: 'Error',
+        message: 'Failed to load activity logs: $e',
       );
     } finally {
       isLoading.value = false;
@@ -58,10 +58,9 @@ class ActivityController extends GetxController {
         hasMoreData.value = false;
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to load more activity logs: $e',
-        snackPosition: SnackPosition.BOTTOM,
+      AwesomeSnackBarHelper.showError(
+        title: 'Error',
+        message: 'Failed to load more activity logs: $e',
       );
     } finally {
       isLoadingMore.value = false;

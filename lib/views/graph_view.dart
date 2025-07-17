@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -13,6 +15,12 @@ class GraphView extends GetView<GraphController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Health Graph'),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
+        ),
         actions: [
           PopupMenuButton<String>(
             onSelected: controller.changePeriod,

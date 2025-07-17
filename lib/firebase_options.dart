@@ -54,11 +54,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'your-android-api-key',
-    appId: 'your-android-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyAVmbhxFB1WPaxpVzzdDHe0WANzI91cIGQ',
+    appId: '1:237268847041:android:d4da62ed1997be31e50740',
+    messagingSenderId: '237268847041',
+    projectId: 'daily-health-tracker-4a2a1',
+    storageBucket: 'daily-health-tracker-4a2a1.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

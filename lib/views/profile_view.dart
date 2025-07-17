@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/profile_controller.dart';
 import '../widgets/animated_card.dart';
 import '../widgets/animated_button.dart';
+import '../utils/helpers.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -12,6 +15,12 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
+        ),
         actions: [
           Obx(
             () => Switch(
@@ -67,6 +76,77 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 12),
+                      // Authentication Source Badge
+                      Obx(
+                        () => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color:
+                                controller.user.value?.id.startsWith(
+                                          'demo_user_',
+                                        ) ==
+                                        true
+                                    ? Colors.orange.withOpacity(0.1)
+                                    : Colors.green.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color:
+                                  controller.user.value?.id.startsWith(
+                                            'demo_user_',
+                                          ) ==
+                                          true
+                                      ? Colors.orange
+                                      : Colors.green,
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                controller.user.value?.id.startsWith(
+                                          'demo_user_',
+                                        ) ==
+                                        true
+                                    ? Icons.code
+                                    : Icons.verified_user,
+                                size: 16,
+                                color:
+                                    controller.user.value?.id.startsWith(
+                                              'demo_user_',
+                                            ) ==
+                                            true
+                                        ? Colors.orange
+                                        : Colors.green,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                controller.user.value?.id.startsWith(
+                                          'demo_user_',
+                                        ) ==
+                                        true
+                                    ? 'Demo Mode'
+                                    : 'Google Authenticated',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      controller.user.value?.id.startsWith(
+                                                'demo_user_',
+                                              ) ==
+                                              true
+                                          ? Colors.orange
+                                          : Colors.green,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -100,10 +180,9 @@ class ProfileView extends GetView<ProfileController> {
                         value: true,
                         onChanged: (value) {
                           // Placeholder for notification settings
-                          Get.snackbar(
-                            'Feature',
-                            'Notification settings coming soon!',
-                            snackPosition: SnackPosition.BOTTOM,
+                          AwesomeSnackBarHelper.showInfo(
+                            title: 'Feature',
+                            message: 'Notification settings coming soon!',
                           );
                         },
                       ),
@@ -115,10 +194,9 @@ class ProfileView extends GetView<ProfileController> {
                       subtitle: const Text('English'),
                       trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
-                        Get.snackbar(
-                          'Feature',
-                          'Language settings coming soon!',
-                          snackPosition: SnackPosition.BOTTOM,
+                        AwesomeSnackBarHelper.showInfo(
+                          title: 'Feature',
+                          message: 'Language settings coming soon!',
                         );
                       },
                     ),
@@ -132,6 +210,105 @@ class ProfileView extends GetView<ProfileController> {
                       },
                     ),
                   ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            // Test Awesome Snack Bars Section
+            Text(
+              'Test Notifications',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 16),
+            AnimatedCard(
+              duration: const Duration(milliseconds: 700),
+              child: Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                AwesomeSnackBarHelper.showSuccess(
+                                  title: 'Success!',
+                                  message:
+                                      'This is a success notification at the top!',
+                                );
+                              },
+                              icon: const Icon(Icons.check_circle),
+                              label: const Text('Success'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                AwesomeSnackBarHelper.showError(
+                                  title: 'Error!',
+                                  message:
+                                      'This is an error notification at the top!',
+                                );
+                              },
+                              icon: const Icon(Icons.error),
+                              label: const Text('Error'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                AwesomeSnackBarHelper.showWarning(
+                                  title: 'Warning!',
+                                  message:
+                                      'This is a warning notification at the top!',
+                                );
+                              },
+                              icon: const Icon(Icons.warning),
+                              label: const Text('Warning'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                AwesomeSnackBarHelper.showInfo(
+                                  title: 'Info!',
+                                  message:
+                                      'This is an info notification at the top!',
+                                );
+                              },
+                              icon: const Icon(Icons.info),
+                              label: const Text('Info'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -281,8 +458,19 @@ class ProfileView extends GetView<ProfileController> {
                 child: const Text('Cancel'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pop(context);
+
+                  // Show loading state briefly
+                  AwesomeSnackBarHelper.showInfo(
+                    title: 'Signing Out...',
+                    message: 'Please wait while we sign you out',
+                    duration: const Duration(seconds: 1),
+                  );
+
+                  // Small delay for visual feedback
+                  await Future.delayed(const Duration(milliseconds: 800));
+
                   controller.signOut();
                 },
                 child: const Text(

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/auth_service.dart';
 import '../models/user.dart';
@@ -11,7 +12,18 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    // Initialize with current user
     user.value = _authService.user;
+
+    // Listen to auth service user changes for real-time updates
+    _authService.userStream.listen((User? newUser) {
+      user.value = newUser;
+      debugPrint(
+        'Dashboard user updated: ${newUser?.name} (${newUser?.email})',
+      );
+    });
+
     loadDashboardData();
   }
 

@@ -14,18 +14,24 @@ void main() async {
 
 Future<void> initServices() async {
   try {
+    debugPrint('Initializing Firebase...');
+
+    // Initialize Firebase
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    debugPrint('Firebase initialized successfully');
-  } catch (e) {
-    debugPrint('Firebase initialized successfully');
-    ('Firebase initialization failed: $e');
-    debugPrint('Firebase initialized successfully');
-    ('App will continue with Google Sign-In only');
-  }
 
-  Get.put(AuthService());
+    debugPrint('Firebase initialized successfully');
+
+    // Initialize services with dependency injection
+    Get.put(AuthService());
+
+    debugPrint('All services initialized successfully');
+  } catch (e) {
+    debugPrint('Service initialization error: $e');
+    // If Firebase fails, still try to initialize auth service
+    Get.put(AuthService());
+  }
 }
 
 class MyApp extends StatelessWidget {

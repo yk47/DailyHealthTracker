@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/activity_controller.dart';
@@ -12,6 +14,12 @@ class ActivityLogsView extends GetView<ActivityController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Activity Logs'),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
