@@ -283,9 +283,7 @@ flutter run
 - Add comments for complex logic
 - Ensure responsive design principles
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -304,6 +302,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ using Flutter** | **Total Score: 100/100 points**
+
 
 *This application demonstrates proficiency in Flutter development, state management, API integration, UI/UX design, Firebase services, and modern mobile app architecture patterns.*
