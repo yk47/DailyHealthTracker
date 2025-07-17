@@ -133,7 +133,7 @@ class LoginView extends GetView<AuthController> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    'assets/google_logo.png',
+                                    'assets/icons/google_logo.png',
                                     width: 24,
                                     height: 24,
                                     errorBuilder: (context, error, stackTrace) {

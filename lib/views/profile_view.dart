@@ -28,6 +28,7 @@ class ProfileView extends GetView<ProfileController> {
               onChanged: (_) => controller.toggleDarkMode(),
             ),
           ),
+          const SizedBox(width: 8),
         ],
       ),
       body: SingleChildScrollView(
@@ -165,6 +166,7 @@ class ProfileView extends GetView<ProfileController> {
                     ListTile(
                       leading: const Icon(Icons.dark_mode),
                       title: const Text('Dark Mode'),
+                      subtitle: const Text('Always enabled in profile'),
                       trailing: Obx(
                         () => Switch(
                           value: controller.isDarkMode.value,

@@ -17,6 +17,9 @@ class ProfileController extends GetxController {
     // Initialize with current user
     user.value = _authService.user;
 
+    // Initialize dark mode based on current theme
+    isDarkMode.value = Get.isDarkMode;
+
     // Listen to auth service user changes for real-time updates
     _authService.userStream.listen((User? newUser) {
       user.value = newUser;
@@ -26,9 +29,32 @@ class ProfileController extends GetxController {
     debugPrint('ProfileController initialized with user: ${user.value?.name}');
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    debugPrint('ProfileController ready');
+  }
+
   void toggleDarkMode() {
+    // Toggle the dark mode state
     isDarkMode.value = !isDarkMode.value;
-    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+
+    // Use Future.microtask to defer theme change and avoid build conflicts
+    Future.microtask(() {
+      if (isDarkMode.value) {
+        Get.changeThemeMode(ThemeMode.dark);
+        AwesomeSnackBarHelper.showSuccess(
+          title: 'Dark Mode Enabled',
+          message: 'Welcome to the dark side! Perfect for profile viewing.',
+        );
+      } else {
+        Get.changeThemeMode(ThemeMode.light);
+        AwesomeSnackBarHelper.showInfo(
+          title: 'Light Mode Enabled',
+          message: 'Bright and beautiful! Light mode is now active.',
+        );
+      }
+    });
   }
 
   Future<void> signOut() async {
